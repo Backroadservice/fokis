@@ -1,0 +1,15 @@
+gantt
+dateFormat  YYYY-MM-DD
+title  Fokis Sprint v1
+section 再生
+Δ補正/合成  :done,    des1, 2025-08-17, 3d
+テスト強化  :active,  des2, after des1, 3d
+section エディタ
+最小コマンド:active,  ed1, 2025-08-17, 4d
+Undo/Redo   :         ed2, after ed1, 2d
+section 保存/競合
+UI分岐      :         sv1, 2025-08-17, 3d
+Resolver    :         cf1, after sv1, 4d
+section 運用
+CLI/CSV     :         op1, 2025-08-17, 2d
+Telemetry   :         op2, after op1, 2d

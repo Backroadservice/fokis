@@ -1,0 +1,7 @@
+id,category,name,criteria
+R-001,playback,Δ境界補間/ジャンプ,切替が仕様どおり/誤差P95≤25ms
+R-002,playback,ジャンプ同期,Δ>33msでreschedule呼び出し
+R-003,playback,低FPS同期,15fpsでP95≤33ms/P99≤45ms
+E-001,editor,Undo/Redo可逆性,5回do/undo/redoで一致
+S-001,save,正常保存,200+rev表示
+S-002,save,競合解決,409→Diff→採否→commit

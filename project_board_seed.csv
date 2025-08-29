@@ -1,0 +1,6 @@
+title,body,priority,lane,labels
+T1: 再生基盤(Δ補正/合成),Interpolator/Scheduler/Sync の骨組みと境界テスト,High,L1,playback;P1
+T2: エディタ最小(Undo/Redo),Add/Remove/Move/ChangeType/EditKeys + 可逆テスト,High,L2,editor;P1
+T3: 保存UI分岐(契約テスト),200/409/413/422/408/5xx を定数化してルーティング,High,L3,save;contract;P1
+T4: 競合Resolver(デモ),Diff+Split+採否→workspace→commit,High,L3,conflict;demo;P1
+T5: 運用/CLI/テレメトリ,validate_view/gen_easing_csv/telemetry wiring,Medium,L4,ops;P1
