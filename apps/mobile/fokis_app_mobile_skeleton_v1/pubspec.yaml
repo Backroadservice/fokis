@@ -1,0 +1,16 @@
+name: fokis_mobile
+description: Fokis mobile skeleton
+publish_to: 'none'
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  # 将来: video_player などを追加
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/save_routing_map.json

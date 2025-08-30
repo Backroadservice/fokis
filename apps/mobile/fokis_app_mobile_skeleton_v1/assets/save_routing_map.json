@@ -1,0 +1,18 @@
+{
+  "routes": {
+    "200": "toastSaved",
+    "409": "goConflict",
+    "413": "showLimitDialog",
+    "422": "showSchemaDialog",
+    "408": "showRetrySnackBar",
+    "5xx": "showRetrySnackBar"
+  },
+  "messages": {
+    "200": "保存完了",
+    "409": "競合が見つかりました。解決画面に移動します。",
+    "413": "サイズ/件数 上限超過です。",
+    "422": "内容不整合（署名/スキーマ）です。",
+    "408": "タイムアウトのため再送します。",
+    "5xx": "サーバ混雑のため再送します。"
+  }
+}
