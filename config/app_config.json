@@ -1,0 +1,10 @@
+{
+  "SYNC_HYSTERESIS_MS": 33,
+  "PAN_MAX_PX_PER_MS": 2.0,
+  "ZOOM_MAX_PER_MS": 0.004,
+  "ROT_MAX_DEG_PER_MS": 0.08,
+  "MAX_EVENTS": 5000,
+  "MAX_VIEW_SIZE_COMPRESSED_MB": 8.0,
+  "conflict_resolver_enabled": false,
+  "routing_map_version": 1
+}

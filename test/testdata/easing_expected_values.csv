@@ -1,0 +1,4 @@
+case_id,easing,t_norm,expected_value,epsilon,notes
+EZ-LINEAR-0,LINEAR,0.00,0.000000,1e-6,boundary
+EZ-LINEAR-50,LINEAR,0.50,0.500000,1e-6,mid
+EZ-LINEAR-100,LINEAR,1.00,1.000000,1e-6,boundary
