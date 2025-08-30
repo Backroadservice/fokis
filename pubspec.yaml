@@ -1,0 +1,9 @@
+﻿name: fokis_core
+description: Core modules and tests for Fokis (P1).
+version: 0.1.0
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+# lib/ や tools/ をそのまま使う想定。依存は最小に。
+dev_dependencies:
+  test: ^1.25.0
