@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "duration_ms": 10000,
+    "source_type": "local"
+  },
+  "timeline": [
+    {
+      "pts_ms": 0,
+      "event_id": "e1"
+    },
+    {
+      "pts_ms": 4000,
+      "event_id": "e2"
+    }
+  ],
+  "events": {
+    "e1": {
+      "event_id": "e1",
+      "type": "ZOOM",
+      "duration_ms": 4000,
+      "actions": [
+        {
+          "action_type": "AT_ZOOM",
+          "channels": [
+            {
+              "channel_id": "CH_SCALE",
+              "keys": [
+                {
+                  "offset_ms": 0,
+                  "value": 1.0,
+                  "easing": "LINEAR"
+                },
+                {
+                  "offset_ms": 4000,
+                  "value": 1.8,
+                  "easing": "EASE_OUT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "e2": {
+      "event_id": "e2",
+      "type": "PAN",
+      "duration_ms": 4000,
+      "actions": [
+        {
+          "action_type": "AT_PAN",
+          "channels": [
+            {
+              "channel_id": "CH_X",
+              "keys": [
+                {
+                  "offset_ms": 0,
+                  "value": 0,
+                  "easing": "LINEAR"
+                },
+                {
+                  "offset_ms": 4000,
+                  "value": 220,
+                  "easing": "EASE_IN_OUT"
+                }
+              ]
+            },
+            {
+              "channel_id": "CH_Y",
+              "keys": [
+                {
+                  "offset_ms": 0,
+                  "value": 0,
+                  "easing": "LINEAR"
+                },
+                {
+                  "offset_ms": 4000,
+                  "value": -120,
+                  "easing": "EASE_IN"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
