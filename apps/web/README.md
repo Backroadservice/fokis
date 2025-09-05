@@ -8,3 +8,11 @@ npm i
 npm run dev
 # ブラウザで http://localhost:5173
 ```
+## 起動方法（ローカル）
+
+前提: Node.js 18 以上 / npm
+
+```bash
+cd apps/web
+npm ci
+npm run dev
