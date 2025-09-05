@@ -1,3 +1,6 @@
 ﻿
 # Windows duplicate copies
 * - コピー.*
+# Web artifacts
+apps/web/node_modules/
+apps/web/dist/
