@@ -1,8 +1,3 @@
-﻿
-# Windows duplicate copies
-* - コピー.*
-# Web artifacts
-apps/web/node_modules/
-apps/web/dist/
 
-apps/web/node_modules/
+# local demo videos
+apps/web/public/sample/*.mp4
