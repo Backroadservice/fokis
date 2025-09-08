@@ -16,3 +16,7 @@ npm run dev
 cd apps/web
 npm ci
 npm run dev
+
+> Windows: 
+pm ci ¨ 
+pm run dev ‚Å‹N“®‚Å‚«‚Ü‚·B
