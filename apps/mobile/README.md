@@ -11,3 +11,5 @@
 flutter pub get
 flutter run -d <device>
 ```
+
+> Windows: Às‚Í lutter run -d windows ‚ªÅ’Z‚Å‚·B
