@@ -1,10 +1,10 @@
-import 'package:test/test.dart';
+﻿import 'package:test/test.dart';
 import '../lib/core/scheduler.dart';
 import '../lib/core/sync_controller.dart';
 import '../lib/core/event_store.dart';
 
 void main(){
-  test('Δ ≤ 33ms uses interpolation path (no reschedule jump)', () {
+  test('ﾎ・竕､ 33ms uses interpolation path (no reschedule jump)', () {
     final store = EventStore();
     store.put(Event(eventId:'e1', type:EventType.zoom, durationMs:1000, actions:[]), 0);
     final sch = Scheduler(store);
@@ -14,7 +14,7 @@ void main(){
     expect(f2.scale, equals(f1.scale)); // placeholder check; no exception means path ok
   });
 
-  test('Δ > 33ms triggers reschedule', () {
+  test('ﾎ・> 33ms triggers reschedule', () {
     final store = EventStore();
     store.put(Event(eventId:'e1', type:EventType.zoom, durationMs:1000, actions:[]), 0);
     final sch = Scheduler(store);
@@ -24,3 +24,4 @@ void main(){
     expect(f2, isA<AppliedFrame>());
   });
 }
+

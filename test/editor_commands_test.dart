@@ -1,4 +1,4 @@
-import 'package:test/test.dart';
+﻿import 'package:test/test.dart';
 import '../apps/mobile/lib/editor/models.dart';
 import '../apps/mobile/lib/editor/editor_commands_impl.dart';
 
@@ -55,3 +55,4 @@ void main() {
     expect(() => ctrl.apply(EditorOps.move('nope', startMs: 0, endMs: 1)), throwsStateError);
   });
 }
+

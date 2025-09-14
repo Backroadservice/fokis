@@ -1,4 +1,4 @@
-import "package:test/test.dart";
+ï»¿import "package:test/test.dart";
 import "../apps/mobile/lib/editor/models.dart";
 import "../apps/mobile/lib/conflict/conflict_model.dart";
 
@@ -7,14 +7,14 @@ TimelineEvent ev(String id, EventType t, int s, int e, [Map<String,Object?> k=co
 
 void main() {
   group("DiffSummary.compare & apply", () {
-    test("add/remove/change ‚ğŒŸo‚µ‚ÄÌ”Û“K—p‚Å‚«‚é", () {
+    test("add/remove/change ã‚’æ¤œå‡ºã—ã¦æ¡å¦é©ç”¨ã§ãã‚‹", () {
       final a = <Timeline>[
         // A: e1(text), e2(sticker)
         [
           ev("e1", EventType.text, 0, 10, {"x":1}),
           ev("e2", EventType.sticker, 10, 20),
         ],
-        // B: e1 ‚ğ type •ÏX(text¨sticker), e2 ‚ğíœ, e3 ‚ğ’Ç‰Á
+        // B: e1 ã‚’ type å¤‰æ›´(textâ†’sticker), e2 ã‚’å‰Šé™¤, e3 ã‚’è¿½åŠ 
         [
           ev("e1", EventType.sticker, 0, 10, {"x":1}), // change
           ev("e3", EventType.text, 30, 40),            // add
@@ -25,14 +25,14 @@ void main() {
       expect(diff.entries.map((d)=>d.kind).toSet(),
           containsAll({DiffKind.add, DiffKind.remove, DiffKind.change}));
 
-      // Ì”Û: e1= B ‚ğÌ—p, e2= A ‚ğˆÛ(íœ‹‘”Û), e3= B ‚ğÌ—p
+      // æ¡å¦: e1= B ã‚’æ¡ç”¨, e2= A ã‚’ç¶­æŒ(å‰Šé™¤æ‹’å¦), e3= B ã‚’æ¡ç”¨
       final merged = DiffSummary.apply(
         baseA: a[0],
         targetB: a[1],
         acceptBById: {"e1": true, "e2": false, "e3": true},
       );
 
-      // Œ‹‰Ê: e1(sticker), e2(sticker) c‚é, e3(add) “ü‚é
+      // çµæœ: e1(sticker), e2(sticker) æ®‹ã‚‹, e3(add) å…¥ã‚‹
       expect(merged.length, 3);
       merged.sort((x,y)=>x.id.compareTo(y.id));
       final m = {for (final e in merged) e.id: e};
@@ -42,3 +42,5 @@ void main() {
     });
   });
 }
+
+
