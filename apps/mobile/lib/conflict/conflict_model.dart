@@ -1,84 +1,56 @@
-import "package:collection/collection.dart";
-import "../editor/models.dart";
-
-enum DiffKind { add, remove, change }
+ï»¿enum DiffOp { add, remove, modify }
 
 class DiffEntry {
-  final String id;
-  final DiffKind kind;
-  final TimelineEvent? a; // ‹Œ
-  final TimelineEvent? b; // V
-  const DiffEntry({required this.id, required this.kind, this.a, this.b});
+  final String key;
+  final Object? a;
+  final Object? b;
+  final DiffOp op;
+  const DiffEntry({required this.key, this.a, this.b, required this.op});
 }
 
 class DiffSummary {
   final List<DiffEntry> entries;
   const DiffSummary(this.entries);
 
-  static final _mapEq = const DeepCollectionEquality().equals;
+  static DiffSummary compare(Map<String, Object?> a, Map<String, Object?> b) {
+    final keys = <String>{...a.keys, ...b.keys}.toList()..sort();
+    final out = <DiffEntry>[];
+    for (final k in keys) {
+      final hasA = a.containsKey(k);
+      final hasB = b.containsKey(k);
+      final va = hasA ? a[k] : null;
+      final vb = hasB ? b[k] : null;
 
-  static bool _eventEquals(TimelineEvent x, TimelineEvent y) {
-    return x.id == y.id &&
-        x.type == y.type &&
-        x.startMs == y.startMs &&
-        x.endMs == y.endMs &&
-        _mapEq(x.keys, y.keys);
-  }
-
-  /// ƒ^ƒCƒ€ƒ‰ƒCƒ“ A¨B ‚Ì·•ª‚ğƒCƒxƒ“ƒg—±“x‚ÅŒvZ
-  static DiffSummary compare(Timeline a, Timeline b) {
-    final ma = {for (final e in a) e.id: e};
-    final mb = {for (final e in b) e.id: e};
-    final ids = {...ma.keys, ...mb.keys}.toList()..sort();
-    final list = <DiffEntry>[];
-
-    for (final id in ids) {
-      final ea = ma[id];
-      final eb = mb[id];
-      if (ea != null && eb == null) {
-        list.add(DiffEntry(id: id, kind: DiffKind.remove, a: ea));
-      } else if (ea == null && eb != null) {
-        list.add(DiffEntry(id: id, kind: DiffKind.add, b: eb));
-      } else if (ea != null && eb != null && !_eventEquals(ea, eb)) {
-        list.add(DiffEntry(id: id, kind: DiffKind.change, a: ea, b: eb));
+      if (hasA && !hasB) {
+        out.add(DiffEntry(key: k, a: va, b: null, op: DiffOp.remove));
+      } else if (!hasA && hasB) {
+        out.add(DiffEntry(key: k, a: null, b: vb, op: DiffOp.add));
+      } else if (!_deepEquals(va, vb)) {
+        out.add(DiffEntry(key: k, a: va, b: vb, op: DiffOp.modify));
       }
     }
-    return DiffSummary(list);
+    return DiffSummary(out);
   }
 
-  /// Ì”Ûƒ}ƒbƒv‚Å B ˆÄ‚ğ“K—pitrue= B ‚ğÌ—p / false = A‚ğˆÛj
-  ///
-  /// - add:   true ‚Å’Ç‰ÁAfalse ‚Å’Ç‰Á‚µ‚È‚¢
-  /// - remove:true ‚ÅíœAfalse ‚Åc‚·
-  /// - change:true ‚Å’uŠ·Afalse ‚Å˜‚¦’u‚«
-  static Timeline apply({
-    required Timeline baseA,
-    required Timeline targetB,
-    required Map<String, bool> acceptBById,
-  }) {
-    final ma = {for (final e in baseA) e.id: e};
-    final mb = {for (final e in targetB) e.id: e};
-    final diff = compare(baseA, targetB);
+  bool get isEmpty => entries.isEmpty;
+  Iterable<DiffEntry> whereOp(DiffOp op) => entries.where((e) => e.op == op);
+}
 
-    for (final d in diff.entries) {
-      final accept = acceptBById[d.id] ?? false;
-      switch (d.kind) {
-        case DiffKind.add:
-          if (accept && d.b != null) ma[d.id] = d.b!;
-          break;
-        case DiffKind.remove:
-          if (accept) ma.remove(d.id);
-          break;
-        case DiffKind.change:
-          if (accept && d.b != null) {
-            ma[d.id] = d.b!;
-          } // accept=false ‚È‚ç‰½‚à‚µ‚È‚¢
-          break;
-      }
+bool _deepEquals(Object? a, Object? b) {
+  if (a is Map && b is Map) {
+    if (a.length != b.length) return false;
+    for (final k in a.keys) {
+      if (!b.containsKey(k)) return false;
+      if (!_deepEquals(a[k], b[k])) return false;
     }
-    // ˆÀ’è‰»‚Ì‚½‚ß ID ƒ\[ƒg
-    final out = ma.values.toList()
-      ..sort((x, y) => x.id.compareTo(y.id));
-    return out;
+    return true;
   }
+  if (a is List && b is List) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (!_deepEquals(a[i], b[i])) return false;
+    }
+    return true;
+  }
+  return a == b;
 }
