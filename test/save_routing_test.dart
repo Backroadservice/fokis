@@ -1,54 +1,19 @@
-Ôªøimport "package:test/test.dart";
-import "../lib/save/save_flow_routing.dart";
+import "package:test/test.dart";
+import "../lib/save_flow_routing.dart";
 
 void main() {
-  group("Save routing", () {
-    test("200/201 ‚Üí closeEditor", () {
-      final d200 = routeForHttp(200);
-      final d201 = routeForHttp(201);
-      expect(d200.route, UiRoute.closeEditor);
-      expect(d201.route, UiRoute.closeEditor);
-    });
-
-    test("409 ‚Üí conflictResolver or stay (flag)", () {
-      final on  = routeForHttp(409, resolverEnabled: true);
-      final off = routeForHttp(409, resolverEnabled: false);
-      expect(on.route, UiRoute.openConflictResolver);
-      expect(on.showOpenAction, true);
-      expect(off.route, UiRoute.stay);
-      expect(off.canRetry, true);
-    });
-
-    test("413 ‚Üí showDialog (no retry)", () {
-      final d = routeForHttp(413);
-      expect(d.route, UiRoute.showDialog);
-      expect(d.canRetry, false);
-    });
-
-    test("422 ‚Üí showDialog (retry)", () {
-      final d = routeForHttp(422);
-      expect(d.route, UiRoute.showDialog);
-      expect(d.canRetry, true);
-    });
-
-    test("408 ‚Üí stay (retry)", () {
-      final d = routeForHttp(408);
-      expect(d.route, UiRoute.stay);
-      expect(d.canRetry, true);
-    });
-
-    test("5xx ‚Üí stay (retry)", () {
-      final d = routeForHttp(503);
-      expect(d.route, UiRoute.stay);
-      expect(d.canRetry, true);
-    });
-
-    test("unknown ‚Üí stay (retry)", () {
-      final d = routeForHttp(499);
-      expect(d.route, UiRoute.stay);
-      expect(d.canRetry, true);
+  group("routeSave", () {
+    test("maps HTTP to UI routes", () {
+      expect(routeSave(const SaveResponse(200)), SaveUi.okSnackbar);
+      expect(routeSave(const SaveResponse(409)), SaveUi.openResolver);
+      expect(routeSave(const SaveResponse(413)), SaveUi.tooLargeDialog);
+      expect(routeSave(const SaveResponse(422)), SaveUi.validationDialog);
+      expect(routeSave(const SaveResponse(408)), SaveUi.timeoutRetry);
+      expect(routeSave(const SaveResponse(500)), SaveUi.serverErrorDialog);
+      expect(routeSave(const SaveResponse(502)), SaveUi.serverErrorDialog);
+      expect(routeSave(const SaveResponse(503)), SaveUi.serverErrorDialog);
+      // ñ¢íËã`ÇÕÉtÉHÅ[ÉãÉoÉbÉN
+      expect(routeSave(const SaveResponse(404)), SaveUi.serverErrorDialog);
     });
   });
 }
-
-
