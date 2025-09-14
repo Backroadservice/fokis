@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 /// エディタ内のイベント種別（最小セット）
 enum EventType { text, sticker, shape, subtitle }
@@ -57,3 +57,4 @@ class EditorState {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-﻿name: fokis_core
+name: fokis_core
 description: Core modules and tests for Fokis (P1).
 version: 0.1.0
 environment:
@@ -7,3 +7,5 @@ environment:
 # lib/ や tools/ をそのまま使う想定。依存は最小に。
 dev_dependencies:
   test: ^1.25.0
+dependencies:
+  meta: ^1.17.0
