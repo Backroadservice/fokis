@@ -6,7 +6,10 @@
     {
       "name": "fokis_core",
       "version": "0.1.0",
-      "dependencies": [],
+      "dependencies": [
+        "collection",
+        "meta"
+      ],
       "devDependencies": [
         "test"
       ]
@@ -42,6 +45,16 @@
         "webkit_inspection_protocol",
         "yaml"
       ]
+    },
+    {
+      "name": "collection",
+      "version": "1.19.1",
+      "dependencies": []
+    },
+    {
+      "name": "meta",
+      "version": "1.17.0",
+      "dependencies": []
     },
     {
       "name": "yaml",
@@ -258,11 +271,6 @@
       ]
     },
     {
-      "name": "collection",
-      "version": "1.19.1",
-      "dependencies": []
-    },
-    {
       "name": "boolean_selector",
       "version": "2.1.2",
       "dependencies": [
@@ -347,11 +355,6 @@
         "source_maps",
         "stack_trace"
       ]
-    },
-    {
-      "name": "meta",
-      "version": "1.17.0",
-      "dependencies": []
     },
     {
       "name": "glob",
