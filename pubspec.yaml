@@ -9,3 +9,4 @@ dev_dependencies:
   test: ^1.25.0
 dependencies:
   meta: ^1.17.0
+  collection: ^1.19.1
